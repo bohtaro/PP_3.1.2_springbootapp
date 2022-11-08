@@ -4,10 +4,13 @@ import com.example.springbootapp.model.User;
 import com.example.springbootapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserService{
 
     private final UserRepository userRepository;
@@ -28,7 +31,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void removeUser(Long id) {
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -39,6 +42,6 @@ public class UserServiceImp implements UserService{
 
     @Override
     public void updateUser(User user) {
-
+        userRepository.save(user);
     }
 }
